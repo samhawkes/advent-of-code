@@ -14,7 +14,6 @@ namespace AdventOfCode
         static void Main(string[] args)
         {
             var basePath = $@"{Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)}\ExternalFiles\";
-            var path = string.Empty;
 
             Console.WriteLine("Which day would you like to solve? ");
             var day = int.Parse(Console.ReadLine());

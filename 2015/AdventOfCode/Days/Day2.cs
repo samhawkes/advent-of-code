@@ -27,82 +27,76 @@ namespace AdventOfCode.Days
 
             foreach (var box in list)
             {
-                var boxSides = CalculateBoxSides(box);
+                Box newBox = new Box(box);
 
-                totalPaper += CalculateSquareFeetOfPaper(boxSides);
-                totalRibbon += CalculateRibbonNeeded(box, boxSides);
+                totalPaper += CalculateSquareFeetOfPaper(newBox);
+                totalRibbon += CalculateRibbonNeeded(newBox);
             }
 
             Console.WriteLine($"The total paper required is: {totalPaper} square feet.");
             Console.WriteLine($"The total ribbon required is: {totalRibbon} feet.");
         }
 
-        private int CalculateRibbonNeeded(string dimensions, Dictionary<string, int> boxSides)
+        private int CalculateRibbonNeeded(Box box)
         {
-            var numbers = dimensions.Split('x');
-
-            int length = int.Parse(numbers[0]);
-            int width = int.Parse(numbers[1]);
-            int height = int.Parse(numbers[2]);
-
-            int boxVolume = length * width * height;
-            int bow = boxVolume;
-
-            var smallestSide = boxSides.Where(x => x.Value.Equals(boxSides.Min(kvp => kvp.Value)));
-
-            int perimeter = 0;
-
-            switch (smallestSide.First().Key)
-            {
-                case ("lw"):
-                    perimeter = (2 * length) + (2 * width);
-                    break;
-
-                case ("wh"):
-                    perimeter = (2 * width) + (2 * height);
-                    break;
-
-                case ("hl"):
-                    perimeter = (2 * height) + (2 * length);
-                    break;
-
-                default:
-                    break;
-            }
-
-            return perimeter + bow;
+            return box.PerimeterOfSmallestSide + box.Volume;
         }
 
-        private int CalculateSquareFeetOfPaper(Dictionary<string, int> boxSides)
+        private int CalculateSquareFeetOfPaper(Box box)
         {
-            var boxArea = 0;
-            var smallestSide = boxSides.Min(kvp => kvp.Value);
-
-            foreach (var side in boxSides)
-            {
-                boxArea += side.Value * 2;
-            }
-
-            return boxArea + smallestSide;
+            return box.Area + box.AreaOfSmallestSide;
         }
-
-        private Dictionary<string, int> CalculateBoxSides(string dimensions)
-        {
-            var numbers = dimensions.Split('x');
-
-            int length = int.Parse(numbers[0]);
-            int width = int.Parse(numbers[1]);
-            int height = int.Parse(numbers[2]);
-
-            Dictionary<string, int> boxSides = new Dictionary<string, int>
-            {
-                { "lw", length * width },
-                { "wh", width * height },
-                { "hl", height * length }
-            };
-
-            return boxSides;
-        }
-
     }
+
+    internal class Box
+    {
+        internal Box(string dimensions)
+        {
+            var numbers = dimensions.Split('x');
+
+            this.Length = int.Parse(numbers[0]);
+            this.Width = int.Parse(numbers[1]);
+            this.Height = int.Parse(numbers[2]);
+
+            this.Volume = Length * Width * Height;
+        }
+
+        internal int Length { get; }
+
+        internal int Width { get; }
+
+        internal int Height { get; }
+
+        internal int Volume { get; }
+
+        internal int LxW => this.Length * this.Width;
+
+        internal int WxH => this.Width * this.Height;
+
+        internal int HxL => this.Height * this.Length;
+
+        internal int Area => (2 * this.LxW) + (2 * this.WxH) + (2 * this.HxL);
+
+        private List<int> SmallestSide
+        {
+            get
+            {
+                List<int> dimensions = new List<int>
+                {
+                    this.Length,
+                    this.Width,
+                    this.Height
+                };
+
+                dimensions.Remove(dimensions.Max());
+
+                return dimensions;
+            }
+        }
+
+        internal int AreaOfSmallestSide => this.SmallestSide[0] * this.SmallestSide[1];
+
+        internal int PerimeterOfSmallestSide => (2 * this.SmallestSide[0]) + (2 * this.SmallestSide[1]);
+    }
+
 }

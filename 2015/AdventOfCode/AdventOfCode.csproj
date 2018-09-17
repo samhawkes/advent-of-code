@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Days\Day2.cs" />
     <Compile Include="Days\Day1.cs" />
+    <Compile Include="Days\Day3.cs" />
     <Compile Include="Days\IPuzzleDay.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +60,7 @@
     <Content Include="ExternalFiles\Day2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="ExternalFiles\Day3.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
