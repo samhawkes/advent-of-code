@@ -29,6 +29,7 @@ namespace AdventOfCode.Days
                 totalPaper += CalculateSquareFeetOfPaper(box);
             }
 
+            Console.WriteLine($"The total paper required is: {totalPaper} square feet.");
         }
 	
         private int CalculateSquareFeetOfPaper(string dimensions)
@@ -38,11 +39,24 @@ namespace AdventOfCode.Days
             int length = int.Parse(numbers[0]);
             int width = int.Parse(numbers[1]);
             int height = int.Parse(numbers[2]);
+            int boxArea = 0;
 
-            return 1;
+            List<int> boxSides = new List<int>
+            {
+                length * width,
+                width * height,
+                height * length
+            };
+
+            int smallestSide = boxSides.Min();
+
+            foreach (var side in boxSides)
+            {
+                boxArea += side * 2;
+            }
+
+            return boxArea + smallestSide;
         }
-
-
 
     }
 }
