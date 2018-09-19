@@ -13,16 +13,18 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            var basePath = $@"{Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)}\ExternalFiles\";
+            while (true)
+            {
+                var basePath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\ExternalFiles\";
 
-            Console.WriteLine("Which day would you like to solve? ");
-            var day = int.Parse(Console.ReadLine());
+                Console.WriteLine("\nWhich day would you like to solve? ");
+                var day = int.Parse(Console.ReadLine());
 
-            Type t = Assembly.GetExecutingAssembly().GetType($"AdventOfCode.Days.Day{day}");
-            IPuzzleDay puzzleDay = (IPuzzleDay)Activator.CreateInstance(t);
+                Type t = Assembly.GetExecutingAssembly().GetType($"AdventOfCode.Days.Day{day}");
+                IPuzzleDay puzzleDay = (IPuzzleDay)Activator.CreateInstance(t);
 
-            puzzleDay.Run(basePath + $"Day{day}.txt");
-        
+                puzzleDay.Run(basePath + $"Day{day}.txt");
+            }
         }
     }
 }
