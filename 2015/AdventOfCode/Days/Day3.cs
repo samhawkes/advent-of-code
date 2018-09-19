@@ -12,15 +12,39 @@ namespace AdventOfCode.Days
         public void Run(string path)
         {
             var reader = new StreamReader(path);
-            var list = new List<char>();
+            var input = new List<char>();
 
             do
             {
                 var ch = (char)reader.Read();
-                list.Add(ch);
+                input.Add(ch);
             }
             while (!reader.EndOfStream);
             reader.Close();
+
+            List<int> grid = new List<int>();
+
+            foreach (char character in input)
+            {
+                if (character.Equals('<'))
+                {
+                    ;//
+                }
+                else if (character.Equals('^'))
+                {
+                    ;//
+                }
+                else if (character.Equals('>'))
+                {
+                    ;//
+                }
+                else if (character.Equals('v'))
+                {
+                    ;//
+                }
+            }
+
+
         }
     }
 }

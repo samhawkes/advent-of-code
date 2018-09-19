@@ -60,7 +60,10 @@
     <Content Include="ExternalFiles\Day2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ExternalFiles\Day3.txt" />
+    <Content Include="ExternalFiles\Day3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
