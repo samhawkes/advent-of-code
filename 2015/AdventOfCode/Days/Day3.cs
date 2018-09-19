@@ -22,7 +22,9 @@ namespace AdventOfCode.Days
             while (!reader.EndOfStream);
             reader.Close();
 
-            List<int> grid = new List<int>();
+            List<House> grid = new List<House>();
+
+            grid.Add(new House())
 
             foreach (char character in input)
             {
@@ -43,8 +45,22 @@ namespace AdventOfCode.Days
                     ;//
                 }
             }
-
-
         }
+
+        internal class House
+        {
+            internal House(int x, int y)
+            {
+                this.X = x;
+                this.Y = y;
+            }
+
+            internal int X { get; set; }
+
+            internal int Y { get; set; }
+
+            internal int NumberOfPresents { get; set; }
+        }
+
     }
 }
