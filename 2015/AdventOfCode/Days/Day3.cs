@@ -22,15 +22,34 @@ namespace AdventOfCode.Days
             while (!reader.EndOfStream);
             reader.Close();
 
-            var globalX = 0;
-            var globalY = 0;
+            var santasInput = new List<char>();
+            var robotsInput = new List<char>();
+
+            for (int i = 0; i < input.Count; i++)
+            {
+                if (i % 2 == 0)
+                    santasInput.Add(input[i]);
+                else
+                    robotsInput.Add(input[i]);
+            }
 
             List<House> neighbourhood = new List<House>
             {
-                new House(globalX, globalY)
+                new House(0, 0)
             };
 
-            foreach (char character in input)
+            neighbourhood = this.MoveAndDeliver(santasInput, neighbourhood);
+            neighbourhood = this.MoveAndDeliver(robotsInput, neighbourhood);
+
+            Console.WriteLine($"The number of houses that received at least one present is {neighbourhood.Count()}.");
+        }
+
+        private List<House> MoveAndDeliver(List<char> splitInput, List<House> neighbourhood)
+        {
+            var globalX = 0;
+            var globalY = 0;
+
+            foreach (char character in splitInput)
             {
                 if (character.Equals('<'))
                 {
@@ -61,7 +80,7 @@ namespace AdventOfCode.Days
                 }
             }
 
-            Console.WriteLine($"The number of houses that received at least one present is {neighbourhood.Count()}.");
+            return neighbourhood;
         }
 
         internal class House
