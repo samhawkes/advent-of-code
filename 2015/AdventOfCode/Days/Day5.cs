@@ -44,6 +44,34 @@ namespace AdventOfCode.Days
 
         private bool IsItNice(string word)
         {
+            List<char> wordArray = new List<char>(word);
+            bool spacedDouble = false;
+            bool doubleChar = false;
+
+            for (int i = 0, j = 2; j < wordArray.Count; i++, j++)
+            {
+                if (wordArray[i].Equals(wordArray[j]))
+                {
+                    spacedDouble = true;
+                    break;
+                }
+            }
+
+            for (int i = 0, j = 1; j < wordArray.Count; i++, j++)
+            {
+                List<char> wordArrayCopy = new List<char>(word);
+                string subString = wordArrayCopy.ElementAt(i).ToString() + wordArrayCopy.ElementAt(j).ToString();
+                string splitWord = word.Remove(0, j+1);
+
+                if (splitWord.Contains(subString))
+                    doubleChar = true;
+            }
+
+            return spacedDouble && doubleChar;
+        }
+
+        private bool IsItNicePart1(string word)
+        {
             List<string> badStrings = new List<string>
             {
                 "ab",
