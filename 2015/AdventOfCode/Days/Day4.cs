@@ -20,7 +20,7 @@ namespace AdventOfCode.Days
 
             var answerString = md5Hash.Split(new[] { input }, StringSplitOptions.RemoveEmptyEntries).First();
 
-            Console.WriteLine($"The smallest integer that gives an MD5 hash with 5 leading 0s for start-key {input} is: {answerString}.");
+            Console.WriteLine($"The smallest integer that gives an MD5 hash with 6 leading 0s for start-key {input} is: {answerString}.");
         }
 
         private string ComputeHex(string input)
@@ -34,7 +34,7 @@ namespace AdventOfCode.Days
 
                 var hash = this.CalculateHash(newString);
 
-                if (hash.StartsWith("00000"))
+                if (hash.StartsWith("000000"))
                     foundHash = true;
             }
             return newString;
