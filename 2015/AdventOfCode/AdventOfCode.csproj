@@ -49,6 +49,7 @@
     <Compile Include="Days\Day4.cs" />
     <Compile Include="Days\Day5.cs" />
     <Compile Include="Days\Day6.cs" />
+    <Compile Include="Days\Day7.cs" />
     <Compile Include="Days\IPuzzleDay.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,6 +74,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ExternalFiles\Day6.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ExternalFiles\Day7.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
