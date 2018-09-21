@@ -18,12 +18,28 @@ namespace AdventOfCode
                 var basePath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\ExternalFiles\";
 
                 Console.WriteLine("\nWhich day would you like to solve? ");
-                var day = int.Parse(Console.ReadLine());
 
-                Type t = Assembly.GetExecutingAssembly().GetType($"AdventOfCode.Days.Day{day}");
-                IPuzzleDay puzzleDay = (IPuzzleDay)Activator.CreateInstance(t);
+                if (!int.TryParse(Console.ReadLine(), out int day))
+                {
+                    Console.WriteLine($"Please enter a valid positive integer.");
+                    continue;
+                }
 
-                puzzleDay.Run(basePath + $"Day{day}.txt");
+                try
+                {
+                    Type t = Assembly.GetExecutingAssembly().GetType($"AdventOfCode.Days.Day{day}");
+                    IPuzzleDay puzzleDay = (IPuzzleDay)Activator.CreateInstance(t);
+
+                    puzzleDay.Run(basePath + $"Day{day}.txt");
+                }
+                catch (System.ArgumentNullException)
+                {
+                    Console.WriteLine($"Could not find a solution for day {day}.");
+                }
+                catch (FileNotFoundException)
+                {
+                    Console.WriteLine($"Could not find an input file for day {day}.");
+                }
             }
         }
     }
