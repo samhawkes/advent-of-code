@@ -19,7 +19,7 @@ namespace AdventOfCode
 
                 Console.WriteLine("\nWhich day would you like to solve? ");
 
-                if (!int.TryParse(Console.ReadLine(), out int day))
+                if (!uint.TryParse(Console.ReadLine(), out uint day))
                 {
                     Console.WriteLine($"Please enter a valid positive integer.");
                     continue;
@@ -32,7 +32,7 @@ namespace AdventOfCode
 
                     puzzleDay.Run(basePath + $"Day{day}.txt");
                 }
-                catch (System.ArgumentNullException)
+                catch (ArgumentNullException)
                 {
                     Console.WriteLine($"Could not find a solution for day {day}.");
                 }
