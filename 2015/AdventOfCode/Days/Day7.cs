@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,16 +10,44 @@ namespace AdventOfCode.Days
     {
         public void Run(string path)
         {
-            var reader = new StreamReader(path);
-            var list = new List<string>();
+            var list = FileReader.ReadLineToStringList(path);
 
-            do
+            /*Idea dump
+             * Class that contains the left hand side - which variables and which operator
+             * Something that contains the right hand side
+             * When trying to evaluate the left, look up what creates it from the right and work backwards 
+             */
+
+
+
+            foreach (var instruction in list)
             {
-                var line = reader.ReadLine();
-                list.Add(line);
+                UInt16 x = 0;
+                UInt16 y = 0;
+                UInt16 z = 0;
+
+                if (instruction.Contains(LogicActions.AND.ToString()))
+                    z = x & y;
+                else if (instruction.Contains(LogicActions.NOT.ToString()))
+                    z = ~x;
+                else if (instruction.Contains(LogicActions.OR.ToString()))
+                    z = x | y;
+                else if (instruction.Contains(LogicActions.LSHIFT.ToString()))
+                    z = x << y;
+                else if (instruction.Contains(LogicActions.RSHIFT.ToString()))
+                    z = x >> y;
             }
-            while (!reader.EndOfStream);
-            reader.Close();
+
+
+        }
+
+        private enum LogicActions
+        {
+            AND,
+            NOT,
+            OR,
+            LSHIFT,
+            RSHIFT
         }
     }
 }
