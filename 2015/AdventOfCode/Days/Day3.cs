@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventOfCode.Days
 {
@@ -11,16 +8,7 @@ namespace AdventOfCode.Days
     {
         public void Run(string path)
         {
-            var reader = new StreamReader(path);
-            var input = new List<char>();
-
-            do
-            {
-                var ch = (char)reader.Read();
-                input.Add(ch);
-            }
-            while (!reader.EndOfStream);
-            reader.Close();
+            var input = FileReader.ReadCharToCharList(path);
 
             var santasInput = new List<char>();
             var robotsInput = new List<char>();

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventOfCode.Days
 {
@@ -11,20 +6,11 @@ namespace AdventOfCode.Days
     {
         public void Run(string path)
         {
+            var list = FileReader.ReadCharToCharList(path);
+
             var currentFloor = 0;
             var index = 0;
             var foundTheBasement = false;
-
-            var reader = new StreamReader(path);
-            var list = new List<char>();
-
-            do
-            {
-                var ch = (char)reader.Read();
-                list.Add(ch);
-            }
-            while (!reader.EndOfStream);
-            reader.Close();
 
             foreach (var character in list)
             {

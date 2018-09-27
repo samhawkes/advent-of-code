@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventOfCode.Days
 {
@@ -12,9 +9,7 @@ namespace AdventOfCode.Days
     {
         public void Run(string path)
         {
-            var reader = new StreamReader(path);
-            string input = reader.ReadToEnd();
-            reader.Close();
+            var input = FileReader.ReadInputToString(path);
 
             var md5Hash = this.ComputeHex(input);
 
