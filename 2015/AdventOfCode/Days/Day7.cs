@@ -18,7 +18,8 @@ namespace AdventOfCode.Days
              * When trying to evaluate the left, look up what creates it from the right and work backwards 
              */
 
-
+            //this regex matches each part of the input string in a separate category
+            //"(?-i)(?<leftValue>[a-z0-9]*)?? ?(?<logicOperator>RSHIFT|LSHIFT|OR|NOT|AND)?? ?(?<rightValue>[a-z0-9]*)?? ?-> (?<answerValue>[a-z0-9]*)"
 
             foreach (var instruction in list)
             {
