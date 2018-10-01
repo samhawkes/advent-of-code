@@ -13,31 +13,12 @@ namespace AdventOfCode.Days
         {
             var list = FileReader.ReadLineToStringList(path);
 
-            /*Idea dump
-             * Class that contains the left hand side - which variables and which operator
-             * Something that contains the right hand side
-             * When trying to evaluate the left, look up what creates it from the right and work backwards 
-             */
-
             var formattedInstructions = this.FormatInstructions(list);
 
+            var answer = this.CalculateAnswerValue(formattedInstructions.First(x => x.AnswerValue.Name.Equals("a")));
             //var noLogicInstructions = formattedInstructions.Where(x => x.LogicOperator.Equals(string.Empty));
 
-            //UInt16 x = 0;
-            //UInt16 y = 0;
-            //UInt16 z = 0;
-
-            //if (instruction.Equals("AND"))
-            //    z = x & y;
-            //else if (instruction.Equals("NOT"))
-            //    z = ~x;
-            //else if (instruction.Equals("OR"))
-            //    z = x | y;
-            //else if (instruction.Equals("LSHIFT"))
-            //    z = x << y;
-            //else if (instruction.Equals("RSHIFT"))
-            //    z = x >> y;
-
+            Console.WriteLine($"The signal ultimately provided to wire \"a\" is : {answer}.");
         }
 
         internal List<Instruction> FormatInstructions(List<string> inputList)
@@ -62,6 +43,30 @@ namespace AdventOfCode.Days
             }
 
             return instructions;
+        }
+
+        internal UInt16? CalculateAnswerValue(Instruction instruction)
+        {
+            //do some recursion in here until I evaluate enough to get the answer.
+
+            if (instruction.AnswerValue.Value != null)
+                return instruction.AnswerValue.Value;
+
+            //need to work out what I'm doing with this block with regards to the answer.
+            //also need to cast to UInt32, then cast the answer back to UInt16
+
+            //if (instruction.Equals("AND"))
+            //    z = x & y;
+            //else if (instruction.Equals("NOT"))
+            //    z = ~x;
+            //else if (instruction.Equals("OR"))
+            //    z = x | y;
+            //else if (instruction.Equals("LSHIFT"))
+            //    z = x << y;
+            //else if (instruction.Equals("RSHIFT"))
+            //    z = x >> y;
+
+            return 0;
         }
 
         internal class Instruction
