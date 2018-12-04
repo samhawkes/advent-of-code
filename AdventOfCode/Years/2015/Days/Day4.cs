@@ -1,9 +1,10 @@
-﻿using System;
+﻿using AdventOfCode.Days;
+using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace AdventOfCode.Days
+namespace AdventOfCode.Years._2015.Days
 {
     public class Day4 : IPuzzleDay
     {

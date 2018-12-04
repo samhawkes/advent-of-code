@@ -43,44 +43,51 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Days\Day2.cs" />
-    <Compile Include="Days\Day1.cs" />
-    <Compile Include="Days\Day3.cs" />
-    <Compile Include="Days\Day4.cs" />
-    <Compile Include="Days\Day5.cs" />
-    <Compile Include="Days\Day6.cs" />
-    <Compile Include="Days\Day7.cs" />
-    <Compile Include="Days\IPuzzleDay.cs" />
+    <Compile Include="Years\2015\Days\Day2.cs" />
+    <Compile Include="Years\2015\Days\Day1.cs" />
+    <Compile Include="Years\2015\Days\Day3.cs" />
+    <Compile Include="Years\2015\Days\Day4.cs" />
+    <Compile Include="Years\2015\Days\Day5.cs" />
+    <Compile Include="Years\2015\Days\Day6.cs" />
+    <Compile Include="Years\2015\Days\Day7.cs" />
+    <Compile Include="IPuzzleDay.cs" />
     <Compile Include="FileReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Years\2018\Days\Day1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ExternalFiles\Day1.txt">
+    <Content Include="Years\2015\ExternalFiles\Day1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ExternalFiles\Day2.txt">
+    <Content Include="Years\2015\ExternalFiles\Day2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ExternalFiles\Day3.txt">
+    <Content Include="Years\2015\ExternalFiles\Day3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ExternalFiles\Day4.txt">
+    <Content Include="Years\2015\ExternalFiles\Day4.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ExternalFiles\Day5.txt">
+    <Content Include="Years\2015\ExternalFiles\Day5.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ExternalFiles\Day6.txt">
+    <Content Include="Years\2015\ExternalFiles\Day6.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ExternalFiles\Day7.txt">
+    <Content Include="Years\2015\ExternalFiles\Day7.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Years\2016\Days\" />
+    <Folder Include="Years\2016\ExternalFiles\" />
+    <Folder Include="Years\2017\Days\" />
+    <Folder Include="Years\2017\ExternalFiles\" />
+    <Folder Include="Years\2018\ExternalFiles\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

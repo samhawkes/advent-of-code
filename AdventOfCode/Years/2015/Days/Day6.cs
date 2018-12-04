@@ -1,9 +1,10 @@
-﻿using System;
+﻿using AdventOfCode.Days;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace AdventOfCode.Days
+namespace AdventOfCode.Years._2015.Days
 {
     public class Day6 : IPuzzleDay
     {

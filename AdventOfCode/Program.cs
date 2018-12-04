@@ -1,11 +1,7 @@
 ﻿using AdventOfCode.Days;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventOfCode
 {
@@ -13,32 +9,81 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            while (true)
+            var basePath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}";
+            bool validYear = false;
+
+            while (!validYear)
             {
-                var basePath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\ExternalFiles\";
+                Console.WriteLine("\nWhich year would you like to solve? ");
 
-                Console.WriteLine("\nWhich day would you like to solve? ");
-
-                if (!uint.TryParse(Console.ReadLine(), out uint day))
+                if (!uint.TryParse(Console.ReadLine(), out uint year))
                 {
                     Console.WriteLine($"Please enter a valid positive integer.");
                     continue;
                 }
 
-                try
-                {
-                    Type t = Assembly.GetExecutingAssembly().GetType($"AdventOfCode.Days.Day{day}");
-                    IPuzzleDay puzzleDay = (IPuzzleDay)Activator.CreateInstance(t);
+                var yearsPath = (basePath + $@"\Years\{year}");
 
-                    puzzleDay.Run(basePath + $"Day{day}.txt");
-                }
-                catch (ArgumentNullException)
+                if (!Directory.Exists(yearsPath))
                 {
-                    Console.WriteLine($"Could not find a solution for day {day}.");
+                    Console.WriteLine($"There doesn't appear to be any solutions for {year}.");
+                    continue;
                 }
-                catch (FileNotFoundException)
+
+                validYear = true;
+
+                bool solvePuzzles = true;
+
+                while (solvePuzzles)
                 {
-                    Console.WriteLine($"Could not find an input file for day {day}.");
+                    var externalFilesPath = $@"{yearsPath}\ExternalFiles\";
+
+                    Console.WriteLine($"\nCurrently looking at the {year} puzzles.");
+                    Console.WriteLine("Which day would you like to solve? ");
+
+                    if (!uint.TryParse(Console.ReadLine(), out uint day))
+                    {
+                        Console.WriteLine($"Please enter a valid positive integer.");
+                        continue;
+                    }
+
+                    try
+                    {
+                        Type t = Assembly.GetExecutingAssembly().GetType($"AdventOfCode.Years._{year}.Days.Day{day}");
+                        IPuzzleDay puzzleDay = (IPuzzleDay)Activator.CreateInstance(t);
+
+                        puzzleDay.Run(externalFilesPath + $"Day{day}.txt");
+                    }
+                    catch (ArgumentNullException)
+                    {
+                        Console.WriteLine($"Could not find a solution for day {day}.");
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        Console.WriteLine($"Could not find an input file for day {day}.");
+                    }
+
+                    bool goodResponse = false;
+                    do
+                    {
+                        Console.WriteLine("\nWould you like to solve another puzzle?");
+
+                        var response = Console.ReadLine().ToLower();
+
+                        if ((response.Equals("yes")) || (response.Equals("y")) || (response.Equals("ye")) || (response.Equals("yea")) || (response.Equals("yeah")) || (response.Equals("yis")) || (response.Equals("yup")))
+                        {
+                            goodResponse = true;
+                            continue;
+                        }
+
+                        if ((response.Equals("no")) || (response.Equals("n")) || (response.Equals("na")) || (response.Equals("nah")) || (response.Equals("nope")))
+                        {
+                            Console.WriteLine("\nThanks for playing!");
+                            goodResponse = true;
+                            solvePuzzles = false;
+                        }
+
+                    } while (!goodResponse);
                 }
             }
         }

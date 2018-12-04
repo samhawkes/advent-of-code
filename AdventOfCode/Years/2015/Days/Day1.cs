@@ -1,6 +1,7 @@
-﻿using System;
+﻿using AdventOfCode.Days;
+using System;
 
-namespace AdventOfCode.Days
+namespace AdventOfCode.Years._2015.Days
 {
     public class Day1 : IPuzzleDay
     {
