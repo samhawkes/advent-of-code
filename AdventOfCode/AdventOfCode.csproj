@@ -81,13 +81,15 @@
     <Content Include="Years\2015\ExternalFiles\Day7.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Years\2018\ExternalFiles\Day1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Years\2016\Days\" />
     <Folder Include="Years\2016\ExternalFiles\" />
     <Folder Include="Years\2017\Days\" />
     <Folder Include="Years\2017\ExternalFiles\" />
-    <Folder Include="Years\2018\ExternalFiles\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
