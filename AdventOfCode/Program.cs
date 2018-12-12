@@ -76,7 +76,7 @@ namespace AdventOfCode
                             continue;
                         }
 
-                        if ((response.Equals("no")) || (response.Equals("n")) || (response.Equals("na")) || (response.Equals("nah")) || (response.Equals("nope")))
+                        if ((response.Equals("no")) || (response.Equals("n")) || (response.Equals("na")) || (response.Equals("nah")) || (response.Equals("nope")) || (response.Equals("nop")))
                         {
                             Console.WriteLine("\nThanks for playing!");
                             goodResponse = true;
