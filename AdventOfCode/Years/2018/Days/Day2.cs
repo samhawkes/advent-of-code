@@ -11,27 +11,40 @@ namespace AdventOfCode.Years._2018.Days
         {
             var list = FileReader.ReadLineToStringList(path);
 
-            var lettersAppearTwice = CalculateOccurancesOfDoubleLetters(list);
-            var lettersAppearThrice = CalculateOccurancesOfTripleLetters(list);
+            var lettersAppearTwice = CalculateOccurrencesOfMultipleLetters(list, 2);
+            var lettersAppearThrice = CalculateOccurrencesOfMultipleLetters(list, 3);
 
-            Console.WriteLine($"The checksum for the list is: {lettersAppearTwice * lettersAppearThrice}.");            
+            var commonLetters = CalculateCommonLetters(list);
+
+            Console.WriteLine($"The checksum for the list is: {lettersAppearTwice * lettersAppearThrice}.");
+            Console.WriteLine($"The common letters between the two correct box IDs are: {commonLetters}.");
         }
 
-        private int CalculateOccurancesOfDoubleLetters(List<string> input)
+        private int CalculateOccurrencesOfMultipleLetters(List<string> input, int numberOfOccurrences)
         {
-            var currentOccurancesOfDoubleLetters = 0;
+            var currentOccurrencesOfMultipleLetters = 0;
 
             foreach (var boxID in input)
             {
+                var array = boxID.ToCharArray();
 
+                foreach (var distinct in array.Distinct())
+                {
+                    if (array.Count(i => i == distinct) == numberOfOccurrences)
+                    {
+                        currentOccurrencesOfMultipleLetters++;
+                        break;
+                    }
+                }
             }
 
-            return currentOccurancesOfDoubleLetters;
+            return currentOccurrencesOfMultipleLetters;
         }
 
-        private uint CalculateOccurancesOfTripleLetters(List<string> input)
+        private string CalculateCommonLetters(List<string> input)
         {
-            return 0;
+            var commonLetters = string.Empty;
+            return commonLetters;
         }
     }
 }
