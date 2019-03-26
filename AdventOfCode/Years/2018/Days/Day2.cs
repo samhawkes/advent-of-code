@@ -43,8 +43,34 @@ namespace AdventOfCode.Years._2018.Days
 
         private string CalculateCommonLetters(List<string> input)
         {
-            var commonLetters = string.Empty;
-            return commonLetters;
+            foreach (var boxID in input)
+            {
+                var currentIdArray = boxID.ToCharArray();
+
+                for (int i = 1; i < input.Count; i++)
+                {
+                    var differentLetters = new List<int>();
+                    var checkingIdArray = input[i].ToCharArray();
+
+                    for (int j = 0; j < currentIdArray.Length; j++)
+                    {
+                        if (currentIdArray[j] != checkingIdArray[j])
+                            differentLetters.Add(j);
+
+                        if (differentLetters.Count > 1)
+                            break;
+                    }
+
+                    if (differentLetters.Count == 1)
+                    {
+                        return new string(currentIdArray).Remove(differentLetters[0], 1);
+                    }
+                        
+
+                }
+            }
+
+            return "There were no IDs that differed by exactly one character.";
         }
     }
 }
