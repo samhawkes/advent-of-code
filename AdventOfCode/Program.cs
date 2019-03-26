@@ -83,7 +83,7 @@ namespace AdventOfCode
                             solvePuzzles = false;
                         }
 
-                    } while (!goodResponse); 
+                    } while (!goodResponse);
                 }
             }
         }
