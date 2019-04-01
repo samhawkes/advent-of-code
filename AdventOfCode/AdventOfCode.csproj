@@ -54,6 +54,7 @@
     <Compile Include="FileReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Years\2017\Days\Day1.cs" />
     <Compile Include="Years\2018\Days\Day2.cs" />
     <Compile Include="Years\2018\Days\Day1.cs" />
   </ItemGroup>
@@ -82,6 +83,9 @@
     <Content Include="Years\2015\ExternalFiles\Day7.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Years\2017\ExternalFiles\Day1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Years\2018\ExternalFiles\Day2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -92,8 +96,6 @@
   <ItemGroup>
     <Folder Include="Years\2016\Days\" />
     <Folder Include="Years\2016\ExternalFiles\" />
-    <Folder Include="Years\2017\Days\" />
-    <Folder Include="Years\2017\ExternalFiles\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
