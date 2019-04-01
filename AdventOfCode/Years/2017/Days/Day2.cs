@@ -21,8 +21,10 @@ namespace AdventOfCode.Years._2017.Days
             }
 
             var largestMinusSmallestChecksum = CalculateLargestMinusSmallestChecksum(sortedArray);
+            var evenlyDivisibleChecksum = CalculateEvenlyDivisibleChecksum(sortedArray);
 
             Console.WriteLine($"The sum of the largest of each row minus the smallest of each row is: {largestMinusSmallestChecksum}.");
+            Console.WriteLine($"The sum of the results of the evenly divisible numbers in each row is: {evenlyDivisibleChecksum}.");
         }
 
 
@@ -55,5 +57,27 @@ namespace AdventOfCode.Years._2017.Days
             return sum;
         }
 
+        private int CalculateEvenlyDivisibleChecksum(List<int[]> sortedArray)
+        {
+            var sum = 0;
+
+            foreach (var row in sortedArray)
+            {
+                var result = 0;
+
+                foreach (var element in row)
+                {
+                    for (int i = 0; i < row.Length; i++)
+                    {
+                        if (element % row[i] == 0 && element / row[i] != 1)
+                            result = element / row[i];
+                    }
+                }
+                
+                sum += result;
+            }
+
+            return sum;
+        }
     }
 }
