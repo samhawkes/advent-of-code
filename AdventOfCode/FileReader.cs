@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace AdventOfCode
 {
@@ -17,6 +18,21 @@ namespace AdventOfCode
             }
             while (!reader.EndOfStream);
             reader.Close();
+
+            return list;
+        }
+
+        internal static List<byte[]> ReadLineToByteArrayList(string path)
+        {
+            var reader = new StreamReader(path);
+            var list = new List<byte[]>();
+
+            do
+            {
+                var line = reader.ReadLine();
+                list.Add(Encoding.Default.GetBytes(line));
+            }
+            while (!reader.EndOfStream);
 
             return list;
         }
