@@ -37,18 +37,13 @@ namespace AdventOfCode.Years._2015.Days
 
         private int CalculateCharactersInEncodedString(List<byte[]> list)
         {
-            foreach (var item in list)
-            {
-                var h = Encoding.Default.GetString(item);
-                var a = Regex.Escape(Encoding.Default.GetString(item));
-                var b = a.ToCharArray();
-                var c = a.Length;
+            var quoteCount = 0;
+            var pattern = "\\\"";
 
-                Console.WriteLine(a);
-            }
-            //this isn't quite getting the right answer. When escaping \", it's returning \\". The AoC is expecting \\\". I'm not sure if I'm wrong or the site is :(
+            list.ForEach(y => quoteCount += Regex.Matches(Encoding.Default.GetString(y), pattern).Count - 2); 
+            //For some reason the way .NET is escaping the strings, it's escaping \" as \\" instead of \\\", so this ForEach is finding every occurance of \" in the strings to add 1 for each to the total
 
-            return list.Sum(x => Regex.Escape(Encoding.Default.GetString(x)).Length + 4); //+4 because we're adding "\ to the start and \" to the end of each string
+            return list.Sum(x => Regex.Escape(Encoding.Default.GetString(x)).Length + 4) + quoteCount; //+4 because we're adding "\ to the start and \" to the end of each string
         }
     }
 }
