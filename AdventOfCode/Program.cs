@@ -9,7 +9,7 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            var basePath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}";
+            var basePath = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}";
             bool validYear = false;
 
             while (!validYear)
@@ -22,7 +22,7 @@ namespace AdventOfCode
                     continue;
                 }
 
-                var yearsPath = (basePath + $@"\Years\{year}");
+                var yearsPath = Path.Combine(basePath, "Years", year.ToString());
 
                 if (!Directory.Exists(yearsPath))
                 {
@@ -36,7 +36,7 @@ namespace AdventOfCode
 
                 while (solvePuzzles)
                 {
-                    var externalFilesPath = $@"{yearsPath}\ExternalFiles\";
+                    var externalFilesPath = Path.Combine(yearsPath, "ExternalFiles");
 
                     Console.WriteLine($"\nCurrently looking at the {year} puzzles.");
                     Console.WriteLine("Which day would you like to solve? ");
@@ -52,7 +52,9 @@ namespace AdventOfCode
                         Type t = Assembly.GetExecutingAssembly().GetType($"AdventOfCode.Years._{year}.Days.Day{day}");
                         IPuzzleDay puzzleDay = (IPuzzleDay)Activator.CreateInstance(t);
 
-                        puzzleDay.Run(externalFilesPath + $"Day{day}.txt");
+                        var filePath = Path.Combine(externalFilesPath, $"Day{day}.txt");
+
+                        puzzleDay.Run(filePath);
                     }
                     catch (ArgumentNullException)
                     {
