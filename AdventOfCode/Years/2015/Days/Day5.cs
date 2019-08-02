@@ -1,7 +1,7 @@
-﻿using AdventOfCode.Days;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AdventOfCode.Days;
 
 namespace AdventOfCode.Years._2015.Days
 {
@@ -11,12 +11,21 @@ namespace AdventOfCode.Years._2015.Days
         {
             var list = FileReader.ReadLineToStringList(path);
 
+            var answer1 = CalculateTheAnswer(list, IsItNicePart1);
+            var answer2 = CalculateTheAnswer(list, IsItNicePart2);
+
+            Console.WriteLine($"The number of nice strings using part 1's method is: {answer1}.");
+            Console.WriteLine($"The number of nice strings using part 2's method is: {answer2}.");
+        }
+
+        private int CalculateTheAnswer(IEnumerable<string> list, Func<string, bool> isItNice)
+        {
             List<string> naughty = new List<string>();
             List<string> nice = new List<string>();
-
+            
             foreach (var word in list)
             {
-                if (this.IsItNice(word))
+                if (isItNice(word))
                 {
                     nice.Add(word);
                 }
@@ -26,12 +35,10 @@ namespace AdventOfCode.Years._2015.Days
                 }
             }
 
-            var answer = nice.Count;
-
-            Console.WriteLine($"The number of nice strings is: {answer}.");
+            return nice.Count;
         }
 
-        private bool IsItNice(string word)
+        private bool IsItNicePart2(string word)
         {
             List<char> wordArray = new List<char>(word);
             bool spacedDouble = false;
@@ -49,7 +56,7 @@ namespace AdventOfCode.Years._2015.Days
             for (int i = 0, j = 1; j < wordArray.Count; i++, j++)
             {
                 List<char> wordArrayCopy = new List<char>(word);
-                string subString = wordArrayCopy.ElementAt(i).ToString() + wordArrayCopy.ElementAt(j).ToString();
+                string subString = wordArrayCopy.ElementAt(i) + wordArrayCopy.ElementAt(j).ToString();
                 string splitWord = word.Remove(0, j+1);
 
                 if (splitWord.Contains(subString))
@@ -69,8 +76,7 @@ namespace AdventOfCode.Years._2015.Days
                 "xy"
             };
 
-            char[] vowels = new char[5]
-            {
+            char[] vowels = {
                 'a',
                 'e',
                 'i',
@@ -82,7 +88,8 @@ namespace AdventOfCode.Years._2015.Days
             {
                 return false;
             }
-            else if (word.ToCharArray().Where(vowels.Contains).Count() < 3)
+
+            if (word.ToCharArray().Where(vowels.Contains).Count() < 3)
             {
                 return false;
             }
@@ -93,10 +100,6 @@ namespace AdventOfCode.Years._2015.Days
                 if (wordArray[i].Equals(wordArray[j]))
                 {
                     return true;
-                }
-                else
-                {
-                    continue;
                 }
             }
             return false;
