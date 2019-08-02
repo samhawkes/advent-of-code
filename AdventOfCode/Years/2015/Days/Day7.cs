@@ -13,12 +13,12 @@ namespace AdventOfCode.Years._2015.Days
         {
             var list = FileReader.ReadLineToStringList(path);
 
-            var formattedInstructions = this.FormatInstructions(list);
+            var formattedInstructions = FormatInstructions(list);
             _instructions = formattedInstructions;
 
             //var expression = GetExpressions();
 
-            var listOfWires = this.GetListOfWires(formattedInstructions);
+            var listOfWires = GetListOfWires(formattedInstructions);
 
             //var answer = this.CalculateAnswerValue(formattedInstructions, listOfWires);
             //var noLogicInstructions = formattedInstructions.Where(x => x.LogicOperator.Equals(string.Empty));
@@ -183,12 +183,12 @@ namespace AdventOfCode.Years._2015.Days
         {
             internal Instruction(string fullInput, CircuitComponent left, string logicOp, CircuitComponent right, CircuitComponent answer)
             {
-                this.FullInput = fullInput;
+                FullInput = fullInput;
 
-                this.LeftValue = left;
-                this.LogicOperator = logicOp;
-                this.RightValue = right;
-                this.AnswerValue = answer;
+                LeftValue = left;
+                LogicOperator = logicOp;
+                RightValue = right;
+                AnswerValue = answer;
             }
 
             internal string FullInput { get; }
@@ -206,11 +206,11 @@ namespace AdventOfCode.Years._2015.Days
         {
             internal CircuitComponent(string name)
             {
-                this.Name = name;
+                Name = name;
 
                 if (UInt16.TryParse(name, out UInt16 result))
                 {
-                    this.Value = result;
+                    Value = result;
                 }
             }
 

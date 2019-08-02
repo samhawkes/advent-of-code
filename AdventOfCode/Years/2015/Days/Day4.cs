@@ -12,7 +12,7 @@ namespace AdventOfCode.Years._2015.Days
         {
             var input = FileReader.ReadInputToString(path);
 
-            var md5Hash = this.ComputeHex(input);
+            var md5Hash = ComputeHex(input);
 
             var answerString = md5Hash.Split(new[] { input }, StringSplitOptions.RemoveEmptyEntries).First();
 
@@ -28,7 +28,7 @@ namespace AdventOfCode.Years._2015.Days
             {
                 newString = string.Concat(input, i.ToString());
 
-                var hash = this.CalculateHash(newString);
+                var hash = CalculateHash(newString);
 
                 if (hash.StartsWith("000000"))
                     foundHash = true;

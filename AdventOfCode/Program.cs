@@ -7,7 +7,7 @@ namespace AdventOfCode
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var basePath = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}";
             bool validYear = false;

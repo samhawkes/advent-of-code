@@ -27,8 +27,8 @@ namespace AdventOfCode.Years._2015.Days
                 new House(0, 0)
             };
 
-            neighbourhood = this.MoveAndDeliver(santasInput, neighbourhood);
-            neighbourhood = this.MoveAndDeliver(robotsInput, neighbourhood);
+            neighbourhood = MoveAndDeliver(santasInput, neighbourhood);
+            neighbourhood = MoveAndDeliver(robotsInput, neighbourhood);
 
             Console.WriteLine($"The number of houses that received at least one present is {neighbourhood.Count()}.");
         }
@@ -76,9 +76,9 @@ namespace AdventOfCode.Years._2015.Days
         {
             internal House(int x, int y)
             {
-                this.X = x;
-                this.Y = y;
-                this.NumberOfPresents = 1;
+                X = x;
+                Y = y;
+                NumberOfPresents = 1;
             }
 
             internal int X { get; }

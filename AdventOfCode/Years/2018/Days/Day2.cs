@@ -24,9 +24,9 @@ namespace AdventOfCode.Years._2018.Days
         {
             var currentOccurrencesOfMultipleLetters = 0;
 
-            foreach (var boxID in input)
+            foreach (var boxId in input)
             {
-                var array = boxID.ToCharArray();
+                var array = boxId.ToCharArray();
 
                 foreach (var distinct in array.Distinct())
                 {
@@ -43,9 +43,9 @@ namespace AdventOfCode.Years._2018.Days
 
         private string CalculateCommonLetters(List<string> input)
         {
-            foreach (var boxID in input)
+            foreach (var boxId in input)
             {
-                var currentIdArray = boxID.ToCharArray();
+                var currentIdArray = boxId.ToCharArray();
 
                 for (int i = 1; i < input.Count; i++)
                 {

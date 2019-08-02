@@ -24,11 +24,11 @@ namespace AdventOfCode.Years._2015.Days
 
             foreach (var instruction in list)
             {
-                grid = this.CalculateLightStatus(grid, instruction);
+                grid = CalculateLightStatus(grid, instruction);
             }
 
-            var lightsOn = grid.Where(l => l.Status == true).Count();
-            var brightness = this.CalculateTotalBrightness(grid);
+            var lightsOn = grid.Count(l => l.Status);
+            var brightness = CalculateTotalBrightness(grid);
 
             Console.WriteLine($"The number of lights still on at the end is: {lightsOn}."); //Part 1
             Console.WriteLine($"The total brightness at the end is: {brightness}."); //Part 2
@@ -36,7 +36,7 @@ namespace AdventOfCode.Years._2015.Days
 
         private List<Light> CalculateLightStatus(List<Light> grid, string instruction)
         {
-            List<string> coords = Regex.Matches(instruction, @"[0-9]{1,3}").Cast<Match>().Select(m => m.Value).ToList();
+            List<string> coords = Regex.Matches(instruction, @"[0-9]{1,3}").Select(m => m.Value).ToList();
 
             int xStart = int.Parse(coords[0]);
             int yStart = int.Parse(coords[1]);
@@ -90,9 +90,9 @@ namespace AdventOfCode.Years._2015.Days
     {
         internal Light(int x, int y)
         {
-            this.X = x;
-            this.Y = y;
-            this.Status = false;
+            X = x;
+            Y = y;
+            Status = false;
         }
 
         internal int X { get; }
@@ -102,10 +102,10 @@ namespace AdventOfCode.Years._2015.Days
 
         internal void DecrementBrightness()
         {
-            if (this.Brightness > 0)
-                this.Brightness -= 1;
+            if (Brightness > 0)
+                Brightness -= 1;
             else
-                this.Brightness = 0;
+                Brightness = 0;
         }
     }
 }

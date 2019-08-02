@@ -43,11 +43,11 @@ namespace AdventOfCode.Years._2015.Days
         {
             var numbers = dimensions.Split('x');
 
-            this.Length = int.Parse(numbers[0]);
-            this.Width = int.Parse(numbers[1]);
-            this.Height = int.Parse(numbers[2]);
+            Length = int.Parse(numbers[0]);
+            Width = int.Parse(numbers[1]);
+            Height = int.Parse(numbers[2]);
 
-            this.Volume = Length * Width * Height;
+            Volume = Length * Width * Height;
         }
 
         internal int Length { get; }
@@ -58,13 +58,13 @@ namespace AdventOfCode.Years._2015.Days
 
         internal int Volume { get; }
 
-        internal int LxW => this.Length * this.Width;
+        internal int LxW => Length * Width;
 
-        internal int WxH => this.Width * this.Height;
+        internal int WxH => Width * Height;
 
-        internal int HxL => this.Height * this.Length;
+        internal int HxL => Height * Length;
 
-        internal int Area => (2 * this.LxW) + (2 * this.WxH) + (2 * this.HxL);
+        internal int Area => (2 * LxW) + (2 * WxH) + (2 * HxL);
 
         private List<int> SmallestSide
         {
@@ -72,9 +72,9 @@ namespace AdventOfCode.Years._2015.Days
             {
                 List<int> dimensions = new List<int>
                 {
-                    this.Length,
-                    this.Width,
-                    this.Height
+                    Length,
+                    Width,
+                    Height
                 };
 
                 dimensions.Remove(dimensions.Max());
@@ -83,9 +83,9 @@ namespace AdventOfCode.Years._2015.Days
             }
         }
 
-        internal int AreaOfSmallestSide => this.SmallestSide[0] * this.SmallestSide[1];
+        internal int AreaOfSmallestSide => SmallestSide[0] * SmallestSide[1];
 
-        internal int PerimeterOfSmallestSide => (2 * this.SmallestSide[0]) + (2 * this.SmallestSide[1]);
+        internal int PerimeterOfSmallestSide => (2 * SmallestSide[0]) + (2 * SmallestSide[1]);
     }
 
 }
