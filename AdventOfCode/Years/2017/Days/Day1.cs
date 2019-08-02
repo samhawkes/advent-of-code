@@ -1,6 +1,6 @@
-﻿using AdventOfCode.Days;
-using System;
+﻿using System;
 using System.Linq;
+using AdventOfCode.Days;
 
 namespace AdventOfCode.Years._2017.Days
 {
@@ -24,8 +24,7 @@ namespace AdventOfCode.Years._2017.Days
 
             var sum = 0;
 
-            for (int j = 0; j < length; j++)
-            {
+            for (var j = 0; j < length; j++)
                 if (j < length - 1)
                 {
                     if (list[j] == list[j + 1])
@@ -36,7 +35,6 @@ namespace AdventOfCode.Years._2017.Days
                     if (list[j] == list[0])
                         sum += list[j];
                 }
-            }
 
             return sum;
         }
@@ -48,8 +46,7 @@ namespace AdventOfCode.Years._2017.Days
 
             var sum = 0;
 
-            for (int j = 0; j < length; j++)
-            {
+            for (var j = 0; j < length; j++)
                 if (j < length / 2)
                 {
                     if (list[j] == list[j + length / 2])
@@ -60,10 +57,8 @@ namespace AdventOfCode.Years._2017.Days
                     if (list[j] == list[j - length / 2])
                         sum += list[j];
                 }
-            }
 
             return sum;
         }
-
     }
 }

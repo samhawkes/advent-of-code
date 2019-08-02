@@ -1,9 +1,9 @@
-﻿using AdventOfCode.Days;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using AdventOfCode.Days;
 
 namespace AdventOfCode.Years._2015.Days
 {
@@ -38,10 +38,10 @@ namespace AdventOfCode.Years._2015.Days
         private int CalculateCharactersInEncodedString(List<byte[]> list)
         {
             var quoteCount = 0;
-            var pattern = "\\\"";
+            const string pattern = "\\\"";
 
-            list.ForEach(y => quoteCount += Regex.Matches(Encoding.Default.GetString(y), pattern).Count - 2); 
-            //For some reason the way .NET is escaping the strings, it's escaping \" as \\" instead of \\\", so this ForEach is finding every occurance of \" in the strings to add 1 for each to the total
+            list.ForEach(y => quoteCount += Regex.Matches(Encoding.Default.GetString(y), pattern).Count - 2);
+            //For some reason the way .NET is escaping the strings, it's escaping \" as \\" instead of \\\", so this ForEach is finding every occurrence of \" in the strings to add 1 for each to the total
 
             return list.Sum(x => Regex.Escape(Encoding.Default.GetString(x)).Length + 4) + quoteCount; //+4 because we're adding "\ to the start and \" to the end of each string
         }

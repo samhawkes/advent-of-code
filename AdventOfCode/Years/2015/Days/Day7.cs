@@ -1,14 +1,18 @@
-﻿using AdventOfCode.Days;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
+using AdventOfCode.Days;
 
 namespace AdventOfCode.Years._2015.Days
 {
     public class Day7 : IPuzzleDay
     {
+        private readonly Dictionary<string, Expression> _expressions = new Dictionary<string, Expression>();
+
+        private List<Instruction> _instructions = new List<Instruction>();
+
         public void Run(string path)
         {
             var list = FileReader.ReadLineToStringList(path);
@@ -36,9 +40,6 @@ namespace AdventOfCode.Years._2015.Days
             Console.WriteLine($"The signal ultimately provided to wire \"a\" is : {answer}.");
         }
 
-        private List<Instruction> _instructions = new List<Instruction>();
-        private Dictionary<string, Expression> _expressions = new Dictionary<string, Expression>();
-
         private Expression GetExpression(Instruction instruction)
         {
             switch (instruction.LogicOperator)
@@ -49,33 +50,39 @@ namespace AdventOfCode.Years._2015.Days
                     var right = GetOperand(instruction.RightValue.Name);
                     return Expression.And(left, right);
                 }
+
                 case "NOT":
                 {
                     var right = GetOperand(instruction.RightValue.Name);
                     return Expression.Not(right);
                 }
+
                 case "OR":
                 {
                     var left = GetOperand(instruction.LeftValue.Name);
                     var right = GetOperand(instruction.RightValue.Name);
                     return Expression.Or(left, right);
                 }
+
                 case "LSHIFT":
                 {
                     var left = GetOperand(instruction.LeftValue.Name);
                     var right = GetOperand(instruction.RightValue.Name);
                     return Expression.LeftShift(left, right);
                 }
+
                 case "RSHIFT":
                 {
                     var left = GetOperand(instruction.LeftValue.Name);
                     var right = GetOperand(instruction.RightValue.Name);
                     return Expression.RightShift(left, right);
                 }
+
                 case "":
                 {
                     return GetOperand(instruction.RightValue.Name);
                 }
+
                 default:
                     throw new Exception();
             }
@@ -94,37 +101,31 @@ namespace AdventOfCode.Years._2015.Days
 
         private Expression GetOperand(string text)
         {
-            if(ushort.TryParse(text, out var value))
-            {
+            if (ushort.TryParse(text, out var value))
                 return Expression.Constant(value);
-            }
-            else if (_expressions.ContainsKey(text))
-            {
+            if (_expressions.ContainsKey(text))
                 return _expressions[text];
-            }
-            else
-            {
-                return Expression.Empty();
-            }
+            return Expression.Empty();
         }
 
         private List<Instruction> FormatInstructions(List<string> inputList)
         {
-            List<Instruction> instructions = new List<Instruction>();
+            var instructions = new List<Instruction>();
 
             foreach (var line in inputList)
             {
-                var rgx = @"(?-i)(?<leftValue>[a-z0-9]*)?? ?(?<logicOperator>RSHIFT|LSHIFT|OR|NOT|AND)?? ?(?<rightValue>[a-z0-9]*)?? ?-> (?<answerValue>[a-z0-9]*)";
+                var rgx =
+                    @"(?-i)(?<leftValue>[a-z0-9]*)?? ?(?<logicOperator>RSHIFT|LSHIFT|OR|NOT|AND)?? ?(?<rightValue>[a-z0-9]*)?? ?-> (?<answerValue>[a-z0-9]*)";
 
                 var matches = Regex.Match(line, rgx).Groups;
 
-                CircuitComponent left = new CircuitComponent(matches["leftValue"].Value);
-                string logic = matches["logicOperator"].Value;
-                CircuitComponent right = new CircuitComponent(matches["rightValue"].Value);
-                CircuitComponent answer = new CircuitComponent(matches["answerValue"].Value);
+                var left = new CircuitComponent(matches["leftValue"].Value);
+                var logic = matches["logicOperator"].Value;
+                var right = new CircuitComponent(matches["rightValue"].Value);
+                var answer = new CircuitComponent(matches["answerValue"].Value);
 
 
-                Instruction instruction = new Instruction(line, left, logic, right, answer);
+                var instruction = new Instruction(line, left, logic, right, answer);
 
                 instructions.Add(instruction);
             }
@@ -134,11 +135,11 @@ namespace AdventOfCode.Years._2015.Days
 
         private List<CircuitComponent> GetListOfWires(List<Instruction> listOfInstructions)
         {
-            List<CircuitComponent> wires = new List<CircuitComponent>();
+            var wires = new List<CircuitComponent>();
 
             foreach (var item in listOfInstructions)
             {
-                CircuitComponent wire = new CircuitComponent(item.AnswerValue.Name);
+                var wire = new CircuitComponent(item.AnswerValue.Name);
 
                 wires.Add(wire);
             }
@@ -146,7 +147,7 @@ namespace AdventOfCode.Years._2015.Days
             return wires.Distinct().ToList();
         }
 
-        private UInt16? CalculateAnswerValue(List<Instruction> listOfInstructions, List<CircuitComponent> listOfWires)
+        private ushort? CalculateAnswerValue(List<Instruction> listOfInstructions, List<CircuitComponent> listOfWires)
         {
             //do some recursion in here until I evaluate enough to get the answer.
 
@@ -156,8 +157,6 @@ namespace AdventOfCode.Years._2015.Days
                 return targetWire.AnswerValue.Value;
 
             return CalculateAnswerValue(listOfInstructions, listOfWires);
-
-
 
 
             //need to work out what I'm doing with this block with regards to the answer.
@@ -181,7 +180,8 @@ namespace AdventOfCode.Years._2015.Days
 
         private class Instruction
         {
-            internal Instruction(string fullInput, CircuitComponent left, string logicOp, CircuitComponent right, CircuitComponent answer)
+            internal Instruction(string fullInput, CircuitComponent left, string logicOp, CircuitComponent right,
+                CircuitComponent answer)
             {
                 FullInput = fullInput;
 
@@ -199,7 +199,7 @@ namespace AdventOfCode.Years._2015.Days
 
             internal CircuitComponent RightValue { get; }
 
-            internal CircuitComponent AnswerValue { get; set; }
+            internal CircuitComponent AnswerValue { get; }
         }
 
         private class CircuitComponent
@@ -208,15 +208,12 @@ namespace AdventOfCode.Years._2015.Days
             {
                 Name = name;
 
-                if (UInt16.TryParse(name, out UInt16 result))
-                {
-                    Value = result;
-                }
+                if (ushort.TryParse(name, out var result)) Value = result;
             }
 
             internal string Name { get; }
 
-            internal UInt16? Value { get; set; }
+            internal ushort? Value { get; }
         }
     }
 }

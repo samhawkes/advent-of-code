@@ -20,44 +20,36 @@ namespace AdventOfCode.Years._2015.Days
 
         private int CalculateTheAnswer(IEnumerable<string> list, Func<string, bool> isItNice)
         {
-            List<string> naughty = new List<string>();
-            List<string> nice = new List<string>();
-            
+            var naughty = new List<string>();
+            var nice = new List<string>();
+
             foreach (var word in list)
-            {
                 if (isItNice(word))
-                {
                     nice.Add(word);
-                }
                 else
-                {
                     naughty.Add(word);
-                }
-            }
 
             return nice.Count;
         }
 
         private bool IsItNicePart2(string word)
         {
-            List<char> wordArray = new List<char>(word);
-            bool spacedDouble = false;
-            bool doubleChar = false;
+            var wordArray = new List<char>(word);
+            var spacedDouble = false;
+            var doubleChar = false;
 
             for (int i = 0, j = 2; j < wordArray.Count; i++, j++)
-            {
                 if (wordArray[i].Equals(wordArray[j]))
                 {
                     spacedDouble = true;
                     break;
                 }
-            }
 
             for (int i = 0, j = 1; j < wordArray.Count; i++, j++)
             {
-                List<char> wordArrayCopy = new List<char>(word);
-                string subString = wordArrayCopy.ElementAt(i) + wordArrayCopy.ElementAt(j).ToString();
-                string splitWord = word.Remove(0, j+1);
+                var wordArrayCopy = new List<char>(word);
+                var subString = wordArrayCopy.ElementAt(i) + wordArrayCopy.ElementAt(j).ToString();
+                var splitWord = word.Remove(0, j + 1);
 
                 if (splitWord.Contains(subString))
                     doubleChar = true;
@@ -68,7 +60,7 @@ namespace AdventOfCode.Years._2015.Days
 
         private bool IsItNicePart1(string word)
         {
-            List<string> badStrings = new List<string>
+            var badStrings = new List<string>
             {
                 "ab",
                 "cd",
@@ -76,7 +68,8 @@ namespace AdventOfCode.Years._2015.Days
                 "xy"
             };
 
-            char[] vowels = {
+            char[] vowels =
+            {
                 'a',
                 'e',
                 'i',
@@ -85,26 +78,18 @@ namespace AdventOfCode.Years._2015.Days
             };
 
             if (badStrings.Any(word.Contains))
-            {
                 return false;
-            }
 
             if (word.ToCharArray().Where(vowels.Contains).Count() < 3)
-            {
                 return false;
-            }
 
             var wordArray = word.ToCharArray();
             for (int i = 0, j = 1; j < wordArray.Length; i++, j++)
             {
                 if (wordArray[i].Equals(wordArray[j]))
-                {
                     return true;
-                }
             }
             return false;
         }
-
-
     }
 }

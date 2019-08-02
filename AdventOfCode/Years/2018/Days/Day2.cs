@@ -1,7 +1,7 @@
-﻿using AdventOfCode.Days;
+﻿using System;
 using System.Collections.Generic;
-using System;
 using System.Linq;
+using AdventOfCode.Days;
 
 namespace AdventOfCode.Years._2018.Days
 {
@@ -47,12 +47,12 @@ namespace AdventOfCode.Years._2018.Days
             {
                 var currentIdArray = boxId.ToCharArray();
 
-                for (int i = 1; i < input.Count; i++)
+                for (var i = 1; i < input.Count; i++)
                 {
                     var differentLetters = new List<int>();
                     var checkingIdArray = input[i].ToCharArray();
 
-                    for (int j = 0; j < currentIdArray.Length; j++)
+                    for (var j = 0; j < currentIdArray.Length; j++)
                     {
                         if (currentIdArray[j] != checkingIdArray[j])
                             differentLetters.Add(j);
@@ -62,11 +62,7 @@ namespace AdventOfCode.Years._2018.Days
                     }
 
                     if (differentLetters.Count == 1)
-                    {
                         return new string(currentIdArray).Remove(differentLetters[0], 1);
-                    }
-                        
-
                 }
             }
 

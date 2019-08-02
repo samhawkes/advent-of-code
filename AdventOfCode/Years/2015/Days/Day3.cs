@@ -1,11 +1,11 @@
-﻿using AdventOfCode.Days;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AdventOfCode.Days;
 
 namespace AdventOfCode.Years._2015.Days
 {
-    class Day3 : IPuzzleDay
+    public class Day3 : IPuzzleDay
     {
         public void Run(string path)
         {
@@ -14,7 +14,7 @@ namespace AdventOfCode.Years._2015.Days
             var santasInput = new List<char>();
             var robotsInput = new List<char>();
 
-            for (int i = 0; i < input.Count; i++)
+            for (var i = 0; i < input.Count; i++)
             {
                 if (i % 2 == 0)
                     santasInput.Add(input[i]);
@@ -22,7 +22,7 @@ namespace AdventOfCode.Years._2015.Days
                     robotsInput.Add(input[i]);
             }
 
-            List<House> neighbourhood = new List<House>
+            var neighbourhood = new List<House>
             {
                 new House(0, 0)
             };
@@ -38,41 +38,38 @@ namespace AdventOfCode.Years._2015.Days
             var globalX = 0;
             var globalY = 0;
 
-            foreach (char character in splitInput)
+            foreach (var character in splitInput)
             {
-                if (character.Equals('<'))
+                switch (character)
                 {
-                    globalX--;
-                }
-                else if (character.Equals('^'))
-                {
-                    globalY++;
-                }
-                else if (character.Equals('>'))
-                {
-                    globalX++;
-                }
-                else if (character.Equals('v'))
-                {
-                    globalY--;
+                    case '<':
+                        globalX--;
+                        break;
+                    case '^':
+                        globalY++;
+                        break;
+                    case '>':
+                        globalX++;
+                        break;
+                    case 'v':
+                        globalY--;
+                        break;
+                    default:
+                        throw new ArgumentException($"An invalid character - \"{character}\" - is in the input file.");
                 }
 
                 var currentHouse = neighbourhood.FirstOrDefault(a => a.X.Equals(globalX) && a.Y.Equals(globalY));
 
                 if (currentHouse == null)
-                {
                     neighbourhood.Add(new House(globalX, globalY));
-                }
                 else
-                {
                     currentHouse.NumberOfPresents++;
-                }
             }
 
             return neighbourhood;
         }
 
-        internal class House
+        private class House
         {
             internal House(int x, int y)
             {
@@ -87,6 +84,5 @@ namespace AdventOfCode.Years._2015.Days
 
             internal int NumberOfPresents { get; set; }
         }
-    
     }
 }

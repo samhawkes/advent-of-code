@@ -1,5 +1,5 @@
-﻿using AdventOfCode.Days;
-using System;
+﻿using System;
+using AdventOfCode.Days;
 
 namespace AdventOfCode.Years._2015.Days
 {
@@ -22,19 +22,14 @@ namespace AdventOfCode.Years._2015.Days
                 }
 
                 if (character.Equals('('))
-                {
                     currentFloor++;
-                }
                 else if (character.Equals(')'))
-                {
                     currentFloor--;
-                }
 
                 index++;
             }
 
             Console.WriteLine($"The final floor Santa arrives on is: {currentFloor}");
         }
-	
     }
 }

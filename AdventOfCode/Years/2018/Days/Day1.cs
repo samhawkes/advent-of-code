@@ -1,7 +1,7 @@
-﻿using AdventOfCode.Days;
+﻿using System;
 using System.Collections.Generic;
-using System;
 using System.Linq;
+using AdventOfCode.Days;
 
 namespace AdventOfCode.Years._2018.Days
 {
@@ -23,26 +23,24 @@ namespace AdventOfCode.Years._2018.Days
             var total = 0;
 
             foreach (var element in input)
-            {
                 total += int.Parse(element);
-            }
 
             return total;
         }
 
         private int FindDuplicate(List<string> input)
         {
-            List<int> usedFrequencies = new List<int>();
+            var usedFrequencies = new List<int>();
             var currentFrequency = 0;
-            bool duplicateFound = false;
-            int loopCount = 0;
+            var duplicateFound = false;
+            var loopCount = 0;
 
             usedFrequencies.Add(currentFrequency);
 
             while (!duplicateFound)
             {
                 loopCount++;
-                List<string> tempList = new List<string>();
+                var tempList = new List<string>();
                 tempList.AddRange(input);
                 while (!duplicateFound && tempList.Any())
                 {
@@ -50,13 +48,9 @@ namespace AdventOfCode.Years._2018.Days
                     tempList.RemoveAt(0);
 
                     if (usedFrequencies.Contains(currentFrequency))
-                    {
                         duplicateFound = true;
-                    }
                     else
-                    {
                         usedFrequencies.Add(currentFrequency);
-                    }
                 }
             }
 

@@ -1,4 +1,5 @@
 ﻿// ReSharper disable once CheckNamespace
+
 namespace AdventOfCode.Days
 {
     public interface IPuzzleDay

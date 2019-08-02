@@ -1,8 +1,8 @@
-﻿using AdventOfCode.Days;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using AdventOfCode.Days;
 
 namespace AdventOfCode.Years._2015.Days
 {
@@ -12,20 +12,18 @@ namespace AdventOfCode.Years._2015.Days
         {
             var list = FileReader.ReadLineToStringList(path);
 
-            List<Light> grid = new List<Light>();
+            var grid = new List<Light>();
 
-            for (int i = 0; i < 1000; i++)
+            for (var i = 0; i < 1000; i++)
             {
-                for (int j = 0; j < 1000; j++)
+                for (var j = 0; j < 1000; j++)
                 {
                     grid.Add(new Light(i, j));
                 }
             }
 
             foreach (var instruction in list)
-            {
                 grid = CalculateLightStatus(grid, instruction);
-            }
 
             var lightsOn = grid.Count(l => l.Status);
             var brightness = CalculateTotalBrightness(grid);
@@ -36,12 +34,12 @@ namespace AdventOfCode.Years._2015.Days
 
         private List<Light> CalculateLightStatus(List<Light> grid, string instruction)
         {
-            List<string> coords = Regex.Matches(instruction, @"[0-9]{1,3}").Select(m => m.Value).ToList();
+            var coords = Regex.Matches(instruction, @"[0-9]{1,3}").Select(m => m.Value).ToList();
 
-            int xStart = int.Parse(coords[0]);
-            int yStart = int.Parse(coords[1]);
-            int xEnd = int.Parse(coords[2]);
-            int yEnd = int.Parse(coords[3]);
+            var xStart = int.Parse(coords[0]);
+            var yStart = int.Parse(coords[1]);
+            var xEnd = int.Parse(coords[2]);
+            var yEnd = int.Parse(coords[3]);
 
             var applicableLights = grid.Where(l => xStart <= l.X && l.X <= xEnd && yStart <= l.Y && l.Y <= yEnd);
 
@@ -78,34 +76,32 @@ namespace AdventOfCode.Years._2015.Days
             var totalBrightness = 0;
 
             foreach (var light in grid)
-            {
                 totalBrightness += light.Brightness;
-            }
 
             return totalBrightness;
         }
-    }
 
-    internal class Light
-    {
-        internal Light(int x, int y)
+        private class Light
         {
-            X = x;
-            Y = y;
-            Status = false;
-        }
+            internal Light(int x, int y)
+            {
+                X = x;
+                Y = y;
+                Status = false;
+            }
 
-        internal int X { get; }
-        internal int Y { get; }
-        internal bool Status { get; set; }
-        internal int Brightness { get; set; }
+            internal int X { get; }
+            internal int Y { get; }
+            internal bool Status { get; set; }
+            internal int Brightness { get; set; }
 
-        internal void DecrementBrightness()
-        {
-            if (Brightness > 0)
-                Brightness -= 1;
-            else
-                Brightness = 0;
+            internal void DecrementBrightness()
+            {
+                if (Brightness > 0)
+                    Brightness -= 1;
+                else
+                    Brightness = 0;
+            }
         }
     }
 }

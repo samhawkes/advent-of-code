@@ -1,8 +1,8 @@
-﻿using AdventOfCode.Days;
-using System;
+﻿using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using AdventOfCode.Days;
 
 namespace AdventOfCode.Years._2015.Days
 {
@@ -14,17 +14,17 @@ namespace AdventOfCode.Years._2015.Days
 
             var md5Hash = ComputeHex(input);
 
-            var answerString = md5Hash.Split(new[] { input }, StringSplitOptions.RemoveEmptyEntries).First();
+            var answerString = md5Hash.Split(new[] {input}, StringSplitOptions.RemoveEmptyEntries).First();
 
             Console.WriteLine($"The smallest integer that gives an MD5 hash with 6 leading 0s for start-key {input} is: {answerString}.");
         }
 
         private string ComputeHex(string input)
         {
-            bool foundHash = false;
-            string newString = string.Empty;
+            var foundHash = false;
+            var newString = string.Empty;
 
-            for (int i = 0; !foundHash; i++)
+            for (var i = 0; !foundHash; i++)
             {
                 newString = string.Concat(input, i.ToString());
 
@@ -33,22 +33,23 @@ namespace AdventOfCode.Years._2015.Days
                 if (hash.StartsWith("000000"))
                     foundHash = true;
             }
+
             return newString;
         }
 
         private string CalculateHash(string input)
         {
-            MD5 md5 = MD5.Create();
+            var md5 = MD5.Create();
 
-            byte[] inputBytes = Encoding.ASCII.GetBytes(input);
+            var inputBytes = Encoding.ASCII.GetBytes(input);
 
-            byte[] hash = md5.ComputeHash(inputBytes);
+            var hash = md5.ComputeHash(inputBytes);
 
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
-            for (int i = 0; i < hash.Length; i++)
+            foreach (var element in hash)
             {
-                sb.Append(hash[i].ToString("x2"));
+                sb.Append(element.ToString("x2"));
             }
 
             return sb.ToString();

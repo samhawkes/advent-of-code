@@ -1,7 +1,7 @@
-﻿using AdventOfCode.Days;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AdventOfCode.Days;
 
 namespace AdventOfCode.Years._2017.Days
 {
@@ -37,17 +37,13 @@ namespace AdventOfCode.Years._2017.Days
                 var largestInRow = row[0];
                 var smallestInRow = row[0];
 
-                for (int i = 0; i < row.Length; i++)
+                for (var i = 0; i < row.Length; i++)
                 {
                     if (row[i] > largestInRow)
-                    {
                         largestInRow = row[i];
-                    }
 
                     if (row[i] < smallestInRow)
-                    {
                         smallestInRow = row[i];
-                    }
                 }
 
                 var difference = largestInRow - smallestInRow;
@@ -67,7 +63,7 @@ namespace AdventOfCode.Years._2017.Days
 
                 foreach (var element in row)
                 {
-                    for (int i = 0; i < row.Length; i++)
+                    for (var i = 0; i < row.Length; i++)
                     {
                         if (element % row[i] == 0 && element / row[i] != 1)
                             result = element / row[i];

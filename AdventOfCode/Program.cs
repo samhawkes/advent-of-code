@@ -1,24 +1,24 @@
-﻿using AdventOfCode.Days;
-using System;
+﻿using System;
 using System.IO;
 using System.Reflection;
+using AdventOfCode.Days;
 
 namespace AdventOfCode
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             var basePath = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}";
-            bool validYear = false;
+            var validYear = false;
 
             while (!validYear)
             {
                 Console.WriteLine("\nWhich year would you like to solve? ");
 
-                if (!uint.TryParse(Console.ReadLine(), out uint year))
+                if (!uint.TryParse(Console.ReadLine(), out var year))
                 {
-                    Console.WriteLine($"Please enter a valid positive integer.");
+                    Console.WriteLine("Please enter a valid positive integer.");
                     continue;
                 }
 
@@ -32,7 +32,7 @@ namespace AdventOfCode
 
                 validYear = true;
 
-                bool solvePuzzles = true;
+                var solvePuzzles = true;
 
                 while (solvePuzzles)
                 {
@@ -41,16 +41,16 @@ namespace AdventOfCode
                     Console.WriteLine($"\nCurrently looking at the {year} puzzles.");
                     Console.WriteLine("Which day would you like to solve? ");
 
-                    if (!uint.TryParse(Console.ReadLine(), out uint day))
+                    if (!uint.TryParse(Console.ReadLine(), out var day))
                     {
-                        Console.WriteLine($"Please enter a valid positive integer.");
+                        Console.WriteLine("Please enter a valid positive integer.");
                         continue;
                     }
 
                     try
                     {
-                        Type t = Assembly.GetExecutingAssembly().GetType($"AdventOfCode.Years._{year}.Days.Day{day}");
-                        IPuzzleDay puzzleDay = (IPuzzleDay)Activator.CreateInstance(t);
+                        var t = Assembly.GetExecutingAssembly().GetType($"AdventOfCode.Years._{year}.Days.Day{day}");
+                        var puzzleDay = (IPuzzleDay) Activator.CreateInstance(t);
 
                         var filePath = Path.Combine(externalFilesPath, $"Day{day}.txt");
 
@@ -65,7 +65,7 @@ namespace AdventOfCode
                         Console.WriteLine($"Could not find an input file for day {day}.");
                     }
 
-                    bool goodResponse = false;
+                    var goodResponse = false;
                     do
                     {
                         Console.WriteLine("\nWould you like to solve another puzzle?");
@@ -84,7 +84,6 @@ namespace AdventOfCode
                             goodResponse = true;
                             solvePuzzles = false;
                         }
-
                     } while (!goodResponse);
                 }
             }

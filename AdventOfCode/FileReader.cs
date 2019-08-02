@@ -15,8 +15,8 @@ namespace AdventOfCode
             {
                 var line = reader.ReadLine();
                 list.Add(line);
-            }
-            while (!reader.EndOfStream);
+            } while (!reader.EndOfStream);
+
             reader.Close();
 
             return list;
@@ -31,8 +31,7 @@ namespace AdventOfCode
             {
                 var line = reader.ReadLine();
                 list.Add(Encoding.Default.GetBytes(line));
-            }
-            while (!reader.EndOfStream);
+            } while (!reader.EndOfStream);
 
             return list;
         }
@@ -44,10 +43,10 @@ namespace AdventOfCode
 
             do
             {
-                var ch = (char)reader.Read();
+                var ch = (char) reader.Read();
                 list.Add(ch);
-            }
-            while (!reader.EndOfStream);
+            } while (!reader.EndOfStream);
+
             reader.Close();
 
             return list;
@@ -56,7 +55,7 @@ namespace AdventOfCode
         internal static string ReadInputToString(string path)
         {
             var reader = new StreamReader(path);
-            string input = reader.ReadToEnd();
+            var input = reader.ReadToEnd();
             reader.Close();
             return input;
         }
