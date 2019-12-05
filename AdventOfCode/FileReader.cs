@@ -92,6 +92,10 @@ namespace AdventOfCode
             return input.Split(',').ToList();
         }
         
+        /// <summary>
+        /// Reads an input and splits it on commas to return a list of ints
+        /// </summary>
+        /// <param name="path">The file path of the input</param>
         internal static List<int> ReadInputToCommaSeparatedIntList(string path)
         {
             var reader = new StreamReader(path);
