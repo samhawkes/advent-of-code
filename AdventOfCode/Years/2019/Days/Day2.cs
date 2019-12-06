@@ -10,15 +10,39 @@ namespace AdventOfCode.Years._2019.Days
         {
             var input = FileReader.ReadInputToCommaSeparatedIntList(path);
 
-            var modifiedList = Compute(input);
+            var part1Computation = Compute(input, 12, 2);
+            
+            Console.WriteLine($"The value at position 0 after computation is: {part1Computation[0]}.");
+            
+            var part2Computation = new List<int>();
+            var targetOutput = 19690720;
 
-            Console.WriteLine($"The value at position 0 after computation is: {modifiedList[0]}.");
+            for (int i = 0; i < 100; i++)
+            {
+                for (int j = 0; j < 100; j++)
+                {
+                    part2Computation = Compute(input, i, j);
+
+                    if (part2Computation[0] == targetOutput)
+                    {
+                        var answer = 100 * i + j;
+                        Console.WriteLine($"The value of (100 * noun) + verb for output {targetOutput} is: {answer}.");
+                        return;
+                    }
+                }
+            }
         }
 
-        private List<int> Compute(List<int> startList)
+        /// <summary>
+        /// Runs the IntCode program
+        /// </summary>
+        /// <param name="startList">The list of OpCodes</param>
+        /// <param name="noun">The OpCode at position 1</param>
+        /// <param name="verb">The OpCode at position 2</param>
+        private List<int> Compute(List<int> startList, int noun, int verb)
         {
-            startList[1] = 12;
-            startList[2] = 2;
+            startList[1] = noun;
+            startList[2] = verb;
             const int add = 1;
             const int multiply = 2;
             const int terminate = 99;
