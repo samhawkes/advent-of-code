@@ -9,8 +9,10 @@ namespace AdventOfCode.Years._2019.Days
         public void Run(string path)
         {
             var input = FileReader.ReadInputToCommaSeparatedIntList(path);
-
-            var part1Computation = Compute(input, 12, 2);
+            var input1 = new List<int>(input);
+            var input2 = new List<int>(input);
+            
+            var part1Computation = Compute(input1, 12, 2);
             
             Console.WriteLine($"The value at position 0 after computation is: {part1Computation[0]}.");
             
@@ -21,7 +23,8 @@ namespace AdventOfCode.Years._2019.Days
             {
                 for (int j = 0; j < 100; j++)
                 {
-                    part2Computation = Compute(input, i, j);
+                    input2 = new List<int>(input);
+                    part2Computation = Compute(input2, i, j);
 
                     if (part2Computation[0] == targetOutput)
                     {
